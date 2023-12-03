@@ -10,8 +10,8 @@ public class DataValues extends DefaultTableModel {
 
     //constructor with ArrayList holding values and String Array holding columns
     public DataValues(ArrayList<String[]>values, String[] columns) {
-        this.values = values;
-        this.columns = columns;
+        this.values = values; //storing rows
+        this.columns = columns; //storing the header
     }
 
 
@@ -20,28 +20,24 @@ public class DataValues extends DefaultTableModel {
     public int getRowCount() {
         if(values==null)
             return 0;
-        return values.size();
+        return values.size(); //return the correct number of rows in the table (size)
     }
 
     @Override
-    public int getColumnCount() {
+    public int getColumnCount() {// will continue to read in columns until there is null left
         if(columns==null)
             return 0;
-        return columns.length;
+        return columns.length; //returns correct number of columns
     }
 
     @Override
-    public String getColumnName(int column) {
-        return columns [column];
+    public String getColumnName(int column) { //column name to string
+        return columns [column]; //returns name of the column at the specified index from the columns array.
     }
 
-    @Override
-    public boolean isCellEditable(int row, int column) {
-        return super.isCellEditable(row, column);
-    }
 
     @Override
-    public Object getValueAt(int row, int column) {
+    public Object getValueAt(int row, int column) { //retrieving the value at specified rows and columns in the table
         return values.get(row)[column];
     }
 
