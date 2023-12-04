@@ -56,7 +56,7 @@ public class GUI extends JFrame {
                     System.out.println("You chose to open this file: " + fileChooser.getSelectedFile().getName()); //prints out only in terminal for now
                     File file = fileChooser.getSelectedFile(); //saving the chosen file in to "file"
                     ArrayList<String[]> all; //arraylist named all
-                    all = CSV.readCSV(new File("src/sample - sample.csv")); //csv file to the arraylist all (calling read.csv method from CSV class)
+                    all = CSV.readCSV(file); //csv file to the arraylist all (calling read.csv method from CSV class)
                     String[] columns = all.get(0); //Reading in the first strings from arraylist All , and adding the first row (0) of the csv file to string column
                     DataValues dataValues = new DataValues(all, columns); //adding the arraylists all and string array columns to dataValues
                     table1.setModel(dataValues); //saving the data values to table1 model
