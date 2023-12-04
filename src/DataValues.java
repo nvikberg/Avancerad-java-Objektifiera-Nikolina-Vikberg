@@ -1,17 +1,16 @@
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import com.eclipsesource.json.*;
 
-public class DataValues extends DefaultTableModel {
+public class DataValues extends DefaultTableModel { // default table model to display the data in swing
 
     //array lists in values and columns
-    private final ArrayList<String[]> values; // set arraylist values as final
-    private final String[] columns; //set string array columns as final
+    private final ArrayList<String[]> values; // arraylist that represents the value (rows) in the table
+    private final String[] columns; //string array columns names
 
     //constructor with ArrayList holding values and String Array holding columns
     public DataValues(ArrayList<String[]>values, String[] columns) {
         this.values = values; //storing rows
-        this.columns = columns; //storing the header
+        this.columns = columns; //storing the column
     }
 
 
@@ -40,5 +39,9 @@ public class DataValues extends DefaultTableModel {
     public Object getValueAt(int row, int column) { //retrieving the value at specified rows and columns in the table
         return values.get(row)[column];
     }
+
+   // public void removeRow(int row) {
+       // values.remove(0);
+    //}
 
 }

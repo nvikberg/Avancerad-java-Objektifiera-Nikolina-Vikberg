@@ -15,10 +15,9 @@ import java.util.Scanner;
 
 public class GUI extends JFrame {
 
-    //adding table1 as object
+   //adding attributes / components
     JTable table1;
     JFileChooser fileChooser;
-    private CSVReader csvReader;
     private JButton openCSVButton;
     private JButton openJSONButton;
     private JScrollPane scrollPane;
@@ -26,21 +25,21 @@ public class GUI extends JFrame {
     // private Json jParser;
     // private String jsonFile = "src/sample.json";
     // public static ArrayList<String> aryLJson = new ArrayList<>();
+    //private CSVReader csvReader;
     ImageIcon image = new ImageIcon("icons8-lotus-48.png");  //create image icon to use in frame and more
 
-
+    // constructor
     GUI() {
 
         design(); //adding a little color just for fun
 
         //setting  up the frame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setContentPane(panel1); //adding panel to
+        setContentPane(panel1); //adding panel1 (panel 1 holds all components) to content pane
         setIconImage(image.getImage()); //place logo in frame (switches out java logo)
         setSize(800, 800);
         setLocationRelativeTo(null);
         setVisible(true);
-        setBackground(new Color(50, 105, 90));
 
         fileChooser = new JFileChooser(); //allows user to search through files (JFileChooser)
         buttonAction(); //calling button action method
@@ -54,13 +53,12 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int response = fileChooser.showOpenDialog(GUI.this); //saving a response for the dialog window (from filechooser)
                 if (response == JFileChooser.APPROVE_OPTION) { //if the user clicks open - code below should execute
-                    System.out.println("You chose to open this file: " +
-                            fileChooser.getSelectedFile().getName());
+                    System.out.println("You chose to open this file: " + fileChooser.getSelectedFile().getName()); //prints out only in terminal for now
                     File file = fileChooser.getSelectedFile(); //saving the chosen file in to "file"
-                    ArrayList<String[]> all; //reading in array list csv "method" to arraylist
+                    ArrayList<String[]> all; //arraylist named all
                     all = CSV.readCSV(new File("src/sample - sample.csv")); //csv file to the arraylist all (calling read.csv method from CSV class)
-                    String[] columns = all.get(0); //Reading in the first strings from arraylist All , and adding the first row of the csv file
-                    DataValues dataValues = new DataValues(all, columns); //adding all and columns to dataValues
+                    String[] columns = all.get(0); //Reading in the first strings from arraylist All , and adding the first row (0) of the csv file to string column
+                    DataValues dataValues = new DataValues(all, columns); //adding the arraylists all and string array columns to dataValues
                     table1.setModel(dataValues); //saving the data values to table1 model
 
                     //Adding sorting feature to the table
