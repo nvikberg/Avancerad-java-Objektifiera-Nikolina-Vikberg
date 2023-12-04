@@ -10,6 +10,7 @@ public class CSV extends GUI{
    //private String file = "src/sample - sample.csv";
 
     CSV(){
+
         super();
     }
 

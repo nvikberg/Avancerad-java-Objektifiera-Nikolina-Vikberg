@@ -42,8 +42,26 @@ public class GUI extends JFrame {
         setVisible(true);
 
         fileChooser = new JFileChooser(); //allows user to search through files (JFileChooser)
-        buttonAction(); //calling button action method
+        buttonAction(); //calling button action for csv method
+        buttonActionJSON(); //calling button action for json method
+    }
 
+
+
+        public void buttonActionJSON(){
+        openJSONButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int response = fileChooser.showOpenDialog(GUI.this); //saving a response for the dialog window (from filechooser)
+                if (response == JFileChooser.APPROVE_OPTION) { //if the user clicks open - code below should execute
+                    System.out.println("You chose to open this file: " + fileChooser.getSelectedFile().getName()); //prints out only in terminal for now
+                   // File file = fileChooser.getSelectedFile(); //saving the chosen file in to "file"
+                    //System.out.println(JSON.readJSON());
+
+                }
+
+            }
+        });
     }
 
     //method for CSV action event, for whatever file user picks, csv reader shall read it in and save it down to columns and rows with help of csvreader method
