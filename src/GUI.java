@@ -1,7 +1,5 @@
 //Nikolina Vikberg
 
-import com.opencsv.CSVReader;
-import com.eclipsesource.json.*;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -9,9 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GUI extends JFrame {
 
@@ -41,22 +37,32 @@ public class GUI extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
 
+
         fileChooser = new JFileChooser(); //allows user to search through files (JFileChooser)
         buttonAction(); //calling button action for csv method
         buttonActionJSON(); //calling button action for json method
     }
 
 
+    //method for JSON action event, for whatever file user picks, json reader shall read it in and save it down to columns and rows
 
-        public void buttonActionJSON(){
+    public void buttonActionJSON(){
         openJSONButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int response = fileChooser.showOpenDialog(GUI.this); //saving a response for the dialog window (from filechooser)
                 if (response == JFileChooser.APPROVE_OPTION) { //if the user clicks open - code below should execute
                     System.out.println("You chose to open this file: " + fileChooser.getSelectedFile().getName()); //prints out only in terminal for now
-                   // File file = fileChooser.getSelectedFile(); //saving the chosen file in to "file"
-                    //System.out.println(JSON.readJSON());
+                    File file = fileChooser.getSelectedFile(); //saving the chosen file in to "file"
+                    ArrayList<String[]> all; //arraylist named all
+                    all = JSON.readJSON(file); //json file to the arraylist all (calling readJSON method from JSON class)
+                    String[] columns = all.get(0); //Reading in the first strings from arraylist All , and adding the first row (0)
+                    DataValues dataValues = new DataValues(all, columns); //adding the arraylists all and string array columns to dataValues
+                    table1.setModel(dataValues); //saving the data values to table1 model
+
+                    //Adding sorting feature to the table
+                    TableRowSorter<TableModel> sorter = new TableRowSorter<>(dataValues);
+                    table1.setRowSorter(sorter);
 
                 }
 
@@ -89,6 +95,10 @@ public class GUI extends JFrame {
     }
 
     public void design() {
+
+        panel1.setBackground(new Color(181, 227, 178, 255));
+        table1.setBackground(new Color(181, 227, 178, 255));
+
         //adding UI manager "Look and Feel design just for fun
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

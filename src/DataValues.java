@@ -1,19 +1,19 @@
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class DataValues extends DefaultTableModel { // default table model to display the data in swing
+public class DataValues extends DefaultTableModel { // default table model to display the table data in swing
 
     //array lists in values and columns
-    private final ArrayList<String[]> values; // arraylist that represents the value (rows) in the table
-    private final String[] columns; //string array columns names
+    private ArrayList<String[]> values; // arraylist that represents the value (rows) in the table
+    private String[] columns; //string array columns names
 
     //constructor with ArrayList holding values and String Array holding columns
     public DataValues(ArrayList<String[]>values, String[] columns) {
         this.values = values; //storing rows
         this.columns = columns; //storing the column
+
     }
-
-
     //adding column count, names, row count, editable cells and value
     @Override
     public int getRowCount() {
@@ -23,8 +23,8 @@ public class DataValues extends DefaultTableModel { // default table model to di
     }
 
     @Override
-    public int getColumnCount() {// will continue to read in columns until there is null left
-        if(columns==null)
+    public int getColumnCount() {
+        if(columns==null) //ensures that it returns the correct number of columns, handling the case where the columns array is null.
             return 0;
         return columns.length; //returns correct number of columns
     }
@@ -39,9 +39,5 @@ public class DataValues extends DefaultTableModel { // default table model to di
     public Object getValueAt(int row, int column) { //retrieving the value at specified rows and columns in the table
         return values.get(row)[column];
     }
-
-   // public void removeRow(int row) {
-       // values.remove(0);
-    //}
 
 }

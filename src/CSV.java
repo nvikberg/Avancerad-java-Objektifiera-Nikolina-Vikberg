@@ -9,11 +9,6 @@ import java.util.ArrayList;
 public class CSV extends GUI{
    //private String file = "src/sample - sample.csv";
 
-    CSV(){
-
-        super();
-    }
-
     //method to read data from a CSV file and store it in an ArrayList, each array of strings is a row from the CSV file.
     public static ArrayList<String[]> readCSV(File file) {
             ArrayList<String[]> csvData = new ArrayList<>(); //arrayList to store the data from the CSV file
